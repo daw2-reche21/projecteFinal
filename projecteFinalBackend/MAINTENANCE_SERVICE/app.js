@@ -28,14 +28,13 @@ const getKms = async function(id){
     }); 
 }
 
-const updateKms = async function(kms, kmsUpdate, id){
-    
+const updateKms = async function(kms, kmsUpdate, id){  
     var kmsTotales = kms + kmsUpdate;  
     mensaje = "";
     const sql = `UPDATE bikes set totalKms = ? where id = ?`;
     return new Promise( (resolve) => {
         connection.query(sql, [kmsTotales, id], (error, results) => {
-            if(error) throw error;
+            if(error || result.affectedRows === 0 ) throw error;
             resolve('Kms bike updated');
         });
     });
@@ -63,7 +62,7 @@ app.post('/updatebike/:id', body('kmsUpdate').isFloat({min : 0}), async(req, res
 
 app.use(function(err, req, res, next) {
     console.error(err.stack);
-    res.status(500).send('Unknown error!');
+    res.status(500).send(err+'Unknown error!');
 });
 
 connection.connect(error => {

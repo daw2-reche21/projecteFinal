@@ -80,13 +80,13 @@ app.post('/', body('totalKms').isFloat({ min: 0 }), (req,res) =>{
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const customerObj = {
+    const bikeData = {
         userId: req.body.userId,
         name: req.body.name, 
         type: req.body.type,
         totalKms: req.body.totalKms   
     }
-    connection.query(sql, customerObj, error => {
+    connection.query(sql, bikeData, error => {
         if (error) throw error;
         res.send('Bike created');
     })   
@@ -96,12 +96,12 @@ app.put('/:id', (req,res) =>{
     const id = req.params.id;
     const sql = 'UPDATE bikes SET ? WHERE id = ?'; 
     connection.query(sql, [req.body, id], (error, result) => {
-        if (error
-            ) throw error;
-        if(result.length>0){
-             throw error;
+        if (error) throw error;
+        if(result.affectedRows === 0){
+            res.status(400).send('Unknown ID');
+        }else{
+            res.send('Bike updated successfully.');
         }
-        res.send('Bike updated successfully.');
     });
 });
 
