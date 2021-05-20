@@ -2,7 +2,7 @@ const express = require ('express')
 const mysql = require('mysql');
 const { body, validationResult } = require('express-validator');
 
-const PORT = process.env.PORT || 3010;
+const PORT = process.env.PORT || 3020;
 
 const app = express();
 
@@ -18,71 +18,67 @@ const connection = mysql.createConnection( {
 
 //Routes
 
-app.get('/',(req,res) =>{
-    const sql = 'SELECT * FROM components';
-    connection.query(sql, (error, results) => {
+app.get('/bike/:id',(req,res) =>{
+    const {id } = req.params;
+    const sql = 'SELECT * FROM userbikecomponents where idBike = ?';
+    connection.query(sql, id,  (error, results) => {
         if(error) throw error;
         if(results.length > 0){
-            res.json(results);
+            res.status(200).json(results);
         }else  {
-            res.send('Not results');      
+            res.status(400).json({msg:'ID not found'});;       
         }
     })
 });
 
 app.get('/:id',(req,res) =>{
-    
         const {id } = req.params;
-        const sql = `SELECT * FROM components WHERE id = ${id}`;
+        const sql = `SELECT * FROM userbikecomponents WHERE id = ${id}`;
         connection.query(sql, (error, results) => {
             if(error) throw error;
             if(results.length > 0){
-                res.json(results);
+                res.status(200).json(results);
             }else  {
-                res.send('Not results');      
+                res.status(400).json({msg:'ID not found'});     
             }
         })   
 });
 
 app.post('/', (req,res) =>{
-
-    const sql = 'INSERT INTO components SET ?';  
-    const componentData = {
-        name: req.body.name,
-        liveKms: req.body.liveKms
+    const sql = 'INSERT INTO userbikecomponents SET ?';  
+    const userBikeComponentsData = {
+        idBike: req.body.idBike,
+        idComponent: req.body.idComponent      
     }
-    connection.query(sql, componentData, error => {
+    connection.query(sql, userBikeComponentsData, (error,result) => {
         if (error) throw error;
-        res.send('Component created');
+        res.status(200).json({msg:'UserBikeComponent created', id:result.insertId});
     })   
 });
 
 app.put('/:id', (req,res) =>{
     const id = req.params.id;
-    const sql = 'UPDATE components SET ? WHERE id = ?'; 
+    const sql = 'UPDATE userbikecomponents SET ? WHERE id = ?'; 
     connection.query(sql, [req.body, id], (error, result) => {
         if (error) throw error;
         if(result.affectedRows === 0){
             res.status(400).send('Unknown ID');
         }else{
-           res.send('Component updated successfully.'); 
+            res.status(200).json({msg:'Component updated succesfully.'});
         }    
     });
 });
 
 app.delete('/:id', (req,res) =>{
     const id = req.params.id;
-    const sql = 'DELETE FROM components WHERE id = ?'; 
-    
-
+    const sql = 'DELETE FROM userbikecomponents WHERE id = ?'; 
     connection.query(sql, id, (error, result) => {
         if (error) throw error;
         if(result.affectedRows === 0){
             res.status(400).send('Unknown ID');
         }else{
-            res.send('Component deleted succesfully.');
-        }
-        
+            res.status(200).json({msg:'Component deleted succesfully.'});
+        }     
     });
 })
 

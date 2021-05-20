@@ -51,9 +51,9 @@ app.post('/', (req,res) =>{
         name: req.body.name,
         liveKms: req.body.liveKms
     }
-    connection.query(sql, componentData, error => {
+    connection.query(sql, componentData, (error,result) => {
         if (error) throw error;
-        res.send('Component created');
+        res.json({msg: 'Component created', id: result.insertId});
     })   
 });
 
@@ -65,7 +65,7 @@ app.put('/:id', (req,res) =>{
         if(result.affectedRows === 0){
             res.status(400).send('Unknown ID');
         }else{
-           res.send('Component updated successfully.'); 
+           res.status(200).json({msg:'Component updated successfully.'}); 
         }    
     });
 });
@@ -74,15 +74,13 @@ app.delete('/:id', (req,res) =>{
     const id = req.params.id;
     const sql = 'DELETE FROM components WHERE id = ?'; 
     
-
     connection.query(sql, id, (error, result) => {
         if (error) throw error;
         if(result.affectedRows === 0){
             res.status(400).send('Unknown ID');
         }else{
-            res.send('Component deleted succesfully.');
-        }
-        
+            res.status(200).json({msg:'Component deleted successfully.'});
+        }     
     });
 })
 

@@ -25,7 +25,7 @@ app.get('/',(req,res) =>{
         if(results.length > 0){
             res.json(results);
         }else  {
-            res.send('Not results');      
+            res.status(400).json({msg:'Not results'});      
         }
     })
 });
@@ -39,36 +39,36 @@ app.get('/:id',(req,res) =>{
             if(results.length > 0){
                 res.json(results);
             }else  {
-                res.send('Not results');      
+                res.status(400).json({msg:'Not results'});      
             }
         })   
 });
 
-app.get('/userbikes/:userId',(req,res) =>{
+app.get('/userbikes/:idUser',(req,res) =>{
     
-    const id  = req.params.userId;
-    const sql = `SELECT * FROM bikes WHERE userId = ${id}`;
+    const id  = req.params.idUser;
+    const sql = `SELECT * FROM bikes WHERE idUser = ${id}`;
     connection.query(sql, (error, results) => {
         if(error) throw error;
         if(results.length > 0){
             res.json(results);
         }else  {
-            res.send('Not results');      
+            res.status(400).json({msg:'Not results'});      
         }
     })   
 });
 
-app.get('/userbikes/:id/:userId',(req,res) =>{
+app.get('/userbikes/:id/:idUser',(req,res) =>{
     
-    const idUser  = req.params.userId;
+    const idUser  = req.params.idUser;
     const id = req.params.id;
-    const sql = `SELECT * FROM bikes WHERE userId = ${idUser} AND id=${id}`;
+    const sql = `SELECT * FROM bikes WHERE idUser = ${idUser} AND id=${id}`;
     connection.query(sql, (error, results) => {
         if(error) throw error;
         if(results.length > 0){
-            res.json(results);
+            res.status(200).json(results);
         }else  {
-            res.send('Not results');      
+            res.status(404).json({msg:'Not results'});      
         }
     })   
 });
@@ -81,14 +81,14 @@ app.post('/', body('totalKms').isFloat({ min: 0 }), (req,res) =>{
       return res.status(400).json({ errors: errors.array() });
     }
     const bikeData = {
-        userId: req.body.userId,
+        idUser: req.body.idUser,
         name: req.body.name, 
         type: req.body.type,
         totalKms: req.body.totalKms   
     }
-    connection.query(sql, bikeData, error => {
+    connection.query(sql, bikeData, (error,result) => {
         if (error) throw error;
-        res.send('Bike created');
+        res.json({msg:'Bike created', id:result.insertId});
     })   
 });
 
@@ -100,7 +100,7 @@ app.put('/:id', (req,res) =>{
         if(result.affectedRows === 0){
             res.status(400).send('Unknown ID');
         }else{
-            res.send('Bike updated successfully.');
+            res.status(200).json({msg:'Bike updated successfully.'});
         }
     });
 });
@@ -112,9 +112,9 @@ app.delete('/:id', (req,res) =>{
     connection.query(sql, id, (error, result) => {
         if (error) throw error;
         if(result>0){
-             throw error;
+            res.status(400).send('Unknown ID');
         }
-        res.send('Bike deleted succesfully.');
+        res.status(200).json({msg:'Bike deleted succesfully.'});
     });
 })
 
