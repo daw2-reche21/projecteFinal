@@ -26,21 +26,21 @@ app.get('/:idUser',(req,res) =>{
         if(results.length > 0){
             res.status(200).json(results);
         }else  {
-            res.status(400).json({msg:"Users not found"});      
+            res.status(400).json({msg:"Notification not found"});      
         }
     })
 });
 
-app.get('/unseen/:id',(req,res) =>{
+app.get('/unseen/:idUser',(req,res) =>{
     
     const idUser = req.params.idUser;
-    const sql = `SELECT * FROM notifications WHERE idUser = ${idUser} AND seen=0 ORDER by createdDate DESC `;
-    connection.query(sql, (error, results) => {
+    const sql = `SELECT * FROM notifications WHERE idUser = ? AND seen=0 ORDER by createdDate DESC `;
+    connection.query(sql, idUser, (error, results) => {
         if(error) throw error;
         if(results.length > 0){
             res.status(200).json(results);
         }else  {
-            res.status(400).json({msg:"ID not found"});      
+            res.status(400).json({msg:"Not unseen notifications"});      
         }
     })   
 });
@@ -60,7 +60,7 @@ app.post('/', (req,res) =>{
 
 app.put('/:id', (req,res) =>{
     const id = req.params.id;
-    const sql = 'UPDATE notification SET ? WHERE id = ?'; 
+    const sql = 'UPDATE notifications SET ? WHERE id = ?'; 
     connection.query(sql, [req.body, id], (error, result) => {
         if (error) throw error;
         if(result.affectedRows === 0){
@@ -72,7 +72,7 @@ app.put('/:id', (req,res) =>{
 });
 
 const getKmsComponents = async function(idBike){
-    const sql = `SELECT u.id, u.currentKms, c.liveKms from userbikecomponents u, components c WHERE u.idComponent = c.id AND u.idBike = ?`;
+    const sql = `SELECT u.id, u.currentKms, c.liveKms, c.name from userbikecomponents u, components c WHERE u.idComponent = c.id AND u.idBike = ?`;
     return new Promise( (resolve) => {
        connection.query(sql,idBike, (error, result) => {
             if(error) throw error
@@ -87,27 +87,31 @@ const getKmsComponents = async function(idBike){
 }
 
 const getPercentage = async function(result){
-    result.percentage = [];
+    
     for(var component of result){
         var calculatedPercentage = (component.currentKms/component.liveKms)*100;
-        result.percentage.push(calculatedPercentage);  
+        component.percentage = calculatedPercentage;  
     }
     return (result);
 }
 
 const createNotificationComponent = async function(result,idUser){
-    const sql= `INSERT INTO notifications set ? where idBike = ?`;
+    const sql= `INSERT INTO notifications set ?`;
     var promises = [];
     for(var component of result){
+        const notificationData = {
+            idUser: idUser,
+            idUserBikeComponent: component.id,
+            message: ''
+        }
         if(component.percentage > 90){
-            const notificationData = {
-                idUser: idUser,
-                idUserBikeComponent: component.id,
-                message: 'Be careful the live of your component is almost over'
-            }
-            promises.push( new Promise( (resolve) => {
+           notificationData.message = `Be careful the live of your ${component.name} is almost over`
+           if(component.percentage >= 100){
+            notificationData.message = `The live of your ${component.name} is over, you should change it`
+           } 
+            promises.push( new Promise( (resolve,reject) => {
                 connection.query(sql, notificationData, (error,result) => {
-                    if (error) throw error;
+                    if (error) reject({status:500,msg:error});  
                     resolve ({msg: 'Notification created', id: result.insertId});
                 })   
             }))
@@ -116,7 +120,7 @@ const createNotificationComponent = async function(result,idUser){
     return Promise.all(promises);
 }
 
-app.put('/livenotifications',(req,res) => {
+app.post('/livenotifications',(req,res) => {
     const idBike = req.body.idBike;
     const idUser = req.body.idUser;
     try{
