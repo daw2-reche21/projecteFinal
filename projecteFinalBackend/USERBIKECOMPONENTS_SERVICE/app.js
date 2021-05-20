@@ -20,7 +20,7 @@ const connection = mysql.createConnection( {
 
 app.get('/bike/:id',(req,res) =>{
     const {id } = req.params;
-    const sql = 'SELECT * FROM userbikecomponents where idBike = ?';
+    const sql = 'SELECT * FROM userbikecomponents u, components c where u.idBike = ? AND c.id=u.idComponent';
     connection.query(sql, id,  (error, results) => {
         if(error) throw error;
         if(results.length > 0){
@@ -33,7 +33,7 @@ app.get('/bike/:id',(req,res) =>{
 
 app.get('/:id',(req,res) =>{
         const {id } = req.params;
-        const sql = `SELECT * FROM userbikecomponents WHERE id = ${id}`;
+        const sql = `SELECT * FROM userbikecomponents u, components c WHERE u.id = ${id} AND c.id=u.idComponent`;
         connection.query(sql, (error, results) => {
             if(error) throw error;
             if(results.length > 0){
