@@ -57,6 +57,18 @@ app.post('/', (req,res) =>{
     })   
 });
 
+app.post('/userexist', (req,res) =>{
+    const email = req.body.email;
+    const sql = 'SELECT * FROM users WHERE email = ?';
+    connection.query(sql, userData, (error,result) =>{
+        if(result.length>0){
+            res.json({msg:'Exist'});
+        }else{
+            res.json({msg:'NotExist'});
+        }
+    })
+})
+
 app.put('/:id', (req,res) =>{
     const id = req.params.id;
     const sql = 'UPDATE users SET ? WHERE id = ?'; 
