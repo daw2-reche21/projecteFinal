@@ -7,53 +7,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel = "stylesheet" href="index.css">
+    <link rel = "stylesheet" href="../index.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
 
-    <div id="headerNoLogin">
+    <div id="headerLogin">
         <nav class="navbar navbar-light">
             <a class="navbar-brand" href="#"><h3>BikeLive</h3></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="btnToggleLogin">
-                Login
-            </button>
-              <div class="collapse navbar-collapse" id="navbarNav">
-                <div id="loginForm">
-                    <form class="menu p-4" id="loginFormulario">
-                        <div class="form-group">
-                          <label for="email">Email address</label>
-                          <input type="email" class="form-control" id="emailLogin" placeholder="email@example.com" required>
-                        </div>
-                        <div class="form-group">
-                          <label for="password">Password</label>
-                          <input type="password" class="form-control" id="passwordLogin" placeholder="Password" required>
-                        </div>
-                        <button type="submit" id="btnLogin" class="btn btn-primary">Sign in</button>
-                      </form>
-                 </div>
-              </div>
+
         </nav>
     </div>
     <div><h1 id="titulo">Keep the life of your Bike</h1></div>
     <div id="register"> 
-        <div class="imgRegister"><img src="imgs/bikelogin.jpg" alt="Bike Vintage"></div>
-        <div id="registerForm">
-        <form class="menu p-4" id="formularioRegistro">
+        <div id="bikeCreating"><h2>Create your Bike</h2></div>
+        <div id="bikeCreatingForm">
+        <form class="menu p-4" id="formularioCreateBike">
             <h2>New? Register here!</h2>
             <div class="form-group">
-              <label for="email">Email address</label>
-              <input type="email" class="form-control" id="emailRegistro" placeholder="email@example.com" required>
+              <label for="bikeName">Name your bike</label>
+              <input type="text" class="form-control" id="nombreBici" placeholder="My awesome bike" required>
             </div>
             <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" class="form-control" id="passwordRegistro" placeholder="Password" required>
+              <select id="selectType" class="custom-select custom-select-lg mb-3">
+                <option selected>Select a bike type</option>
+                <option value="ROAD">Road</option>
+                <option value="MTB/XC">MTB/XC</option>
+                <option value="BMX">BMX</option>
+                <option value="GRAVEL">Gravel</option>
+              </select>
             </div>
-            <button type="submit" class="btn btn-primary" id="btnRegistro">Sign up</button>
+            <div class="form-group">
+                <label for="bikeName">How many kilómeters has your bike?</label>
+                <input type="number" value=0 class="form-control" id="kmsBici" placeholder="Write 0 if you don't know" required>
+              </div>
+            <button type="submit" class="btn btn-primary" id="btnCreateBike">Sign up</button>
           </form>
         </div>
     </div>
-    <div id="footerNoLogin">
+    <div id="footerLogin">
         <hr />
         
         <div id="menuFooterLogin"><div class="list-group list-group-flush">

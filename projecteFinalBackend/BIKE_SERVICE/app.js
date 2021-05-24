@@ -1,10 +1,12 @@
 const express = require ('express')
 const mysql = require('mysql');
 const { body, validationResult } = require('express-validator');
+var cors = require('cors');
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 1057;
 
 const app = express();
+app.options('*',cors());
 
 app.use(express.json());
 
@@ -18,7 +20,7 @@ const connection = mysql.createConnection( {
 
 //Routes
 
-app.get('/',(req,res) =>{
+app.get('/', cors(),(req,res) =>{
     const sql = 'SELECT * FROM bikes';
     connection.query(sql, (error, results) => {
         if(error) throw error;
@@ -30,7 +32,7 @@ app.get('/',(req,res) =>{
     })
 });
 
-app.get('/:id',(req,res) =>{
+app.get('/:id', cors(),(req,res) =>{
     
         const {id } = req.params;
         const sql = `SELECT * FROM bikes WHERE id = ${id}`;
@@ -44,7 +46,7 @@ app.get('/:id',(req,res) =>{
         })   
 });
 
-app.get('/userbikes/:idUser',(req,res) =>{
+app.get('/userbikes/:idUser',cors(),(req,res) =>{
     
     const id  = req.params.idUser;
     const sql = `SELECT * FROM bikes WHERE idUser = ${id}`;
@@ -58,7 +60,7 @@ app.get('/userbikes/:idUser',(req,res) =>{
     })   
 });
 
-app.get('/userbikes/:id/:idUser',(req,res) =>{
+app.get('/userbikes/:id/:idUser', cors(),(req,res) =>{
     
     const idUser  = req.params.idUser;
     const id = req.params.id;
@@ -73,7 +75,7 @@ app.get('/userbikes/:id/:idUser',(req,res) =>{
     })   
 });
 
-app.post('/', body('totalKms').isFloat({ min: 0 }), (req,res) =>{
+app.post('/', body('totalKms').isFloat({ min: 0 }), cors(), (req,res) =>{
 
     const sql = 'INSERT INTO bikes SET ?';
     const errors = validationResult(req);
@@ -92,7 +94,7 @@ app.post('/', body('totalKms').isFloat({ min: 0 }), (req,res) =>{
     })   
 });
 
-app.put('/:id', (req,res) =>{
+app.put('/:id', cors(), (req,res) =>{
     const id = req.params.id;
     const sql = 'UPDATE bikes SET ? WHERE id = ?'; 
     connection.query(sql, [req.body, id], (error, result) => {
@@ -105,7 +107,7 @@ app.put('/:id', (req,res) =>{
     });
 });
 
-app.delete('/:id', (req,res) =>{
+app.delete('/:id', cors(), (req,res) =>{
     const id = req.params.id;
     const sql = 'DELETE FROM bikes WHERE id = ?'; 
     

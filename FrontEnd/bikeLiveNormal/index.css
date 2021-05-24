@@ -1,13 +1,27 @@
 #headerNologin, #titulo, #register{
     padding: 1em;
 }
-
-
-
 #register{
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+
+@media(max-width: 600px){
+    #register{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    #footerNoLogin{
+        flex-direction:column-reverse;
+    }
+    #autor{
+        flex-grow: 7;
+        align-content: bottom;
+    }
+   #menuFooterLogin{
+       flex-grow: 0;
+   }
 }
 .imgRegister{
     flex-grow:0;
@@ -25,5 +39,25 @@
     display: flex;
     justify-content: flex-end;
 }
+
+#footerNoLogin{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    border-top: 1px solid rgb(163, 163, 163);
+}
+#autor{
+    flex-grow: 9;
+}
+#menuFooterLogin{
+   flex-grow: 2;
+}
+
+
+
+
+
+
+
 
 
