@@ -15,15 +15,18 @@
     <div id="headerLogin">
         <nav class="navbar navbar-light">
             <a class="navbar-brand" href="#"><h3>BikeLive</h3></a>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-secondary">Help</button>
+                <button type="button" class="btn btn-secondary">Notifications <span class="badge badge-light">4</span></button>
+              </div>
 
         </nav>
     </div>
     <div><h1 id="titulo">Keep the life of your Bike</h1></div>
     <div id="register"> 
-        <div id="bikeCreating"><h2>Create your Bike</h2></div>
         <div id="bikeCreatingForm">
         <form class="menu p-4" id="formularioCreateBike">
-            <h2>New? Register here!</h2>
+            <h2>Create your Bike</h2>
             <div class="form-group">
               <label for="bikeName">Name your bike</label>
               <input type="text" class="form-control" id="nombreBici" placeholder="My awesome bike" required>
@@ -41,11 +44,11 @@
                 <label for="bikeName">How many kilómeters has your bike?</label>
                 <input type="number" value=0 class="form-control" id="kmsBici" placeholder="Write 0 if you don't know" required>
               </div>
-            <button type="submit" class="btn btn-primary" id="btnCreateBike">Sign up</button>
+            <button type="submit" class="btn btn-primary" id="btnCreateBike">Create Bike</button>
           </form>
         </div>
     </div>
-    <div id="footerLogin">
+    <div id="footerNoLogin">
         <hr />
         
         <div id="menuFooterLogin"><div class="list-group list-group-flush">
