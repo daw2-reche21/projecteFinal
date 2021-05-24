@@ -1,0 +1,29 @@
+#headerNologin, #titulo, #register{
+    padding: 1em;
+}
+
+
+
+#register{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.imgRegister{
+    flex-grow:0;
+}
+.imgRegister img{
+    width: 500px;
+}
+#registerForm{
+    flex-grow:0;  
+}
+#titulo{
+    text-align: center;
+}
+#loginForm{
+    display: flex;
+    justify-content: flex-end;
+}
+
+
