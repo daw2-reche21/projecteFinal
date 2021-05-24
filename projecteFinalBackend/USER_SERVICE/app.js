@@ -1,10 +1,12 @@
 const express = require ('express')
 const mysql = require('mysql');
 const { body, validationResult } = require('express-validator');
+var cors = require('cors')
 
 const PORT = process.env.PORT || 1080;
 
 const app = express();
+app.options('*',cors());
 
 app.use(express.json());
 
@@ -60,7 +62,7 @@ app.post('/', (req,res) =>{
 app.post('/userexist', (req,res) =>{
     const email = req.body.email;
     const sql = 'SELECT * FROM users WHERE email = ?';
-    connection.query(sql, userData, (error,result) =>{
+    connection.query(sql, email, (error,result) =>{
         if(result.length>0){
             res.json({msg:'Exist'});
         }else{
