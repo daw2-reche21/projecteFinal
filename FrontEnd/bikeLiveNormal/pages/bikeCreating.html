@@ -32,17 +32,19 @@
               <input type="text" class="form-control" id="nombreBici" placeholder="My awesome bike" required>
             </div>
             <div class="form-group">
+              <label for="selectType">Choose a bike type</label>
               <select id="selectType" class="custom-select custom-select-lg mb-3">
-                <option selected>Select a bike type</option>
-                <option value="ROAD">Road</option>
-                <option value="MTB/XC">MTB/XC</option>
+                <option value="ROAD" selected>Road</option>
+                <option value="MTBHARDTAIL">MTB HardTail</option>
+                <option value="MTBALLMOUNTAIN">MTB All Mountain</option>
                 <option value="BMX">BMX</option>
                 <option value="GRAVEL">Gravel</option>
               </select>
             </div>
             <div class="form-group">
-                <label for="bikeName">How many kilómeters has your bike?</label>
-                <input type="number" value=0 class="form-control" id="kmsBici" placeholder="Write 0 if you don't know" required>
+                <label for="kmsBike">How many kilómeters has your bike?</label>
+                <input  min="0" max="80000" type="number" value=0 
+                class="form-control" id="kmsBike" placeholder="Write 0 if you don't know" required>
               </div>
             <button type="submit" class="btn btn-primary" id="btnCreateBike">Create Bike</button>
           </form>
@@ -76,6 +78,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="index.js"></script>
+    <script src="../index.js"></script>
+    <script src="../js/bikeCreating.js"></script>
   </body>
 </html>

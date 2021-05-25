@@ -32,6 +32,19 @@ app.get('/',cors(),(req,res) =>{
     })
 });
 
+app.get('/bymail/:email',cors(),(req,res) =>{
+	const email = req.params.email;
+    const sql = 'SELECT * FROM users WHERE email = ?';
+    connection.query(sql, email,  (error, results) => {
+        if(error) throw error;
+        if(results.length > 0){
+            res.status(200).json(results);
+        }else  {
+            res.status(400).json({msg:"Users not found"});      
+        }
+    })
+});
+
 app.get('/:id',cors(),(req,res) =>{
     
     const {id } = req.params;

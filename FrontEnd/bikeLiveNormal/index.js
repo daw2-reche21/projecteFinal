@@ -42,6 +42,10 @@ function registerUser(userData) {
             console.log(result.msg);
             if(result.status == 200){
                 console.log(result.id);
+                sessionStorage.setItem('userId', result.id);  
+                sessionStorage.setItem('userName', userData.email); 
+                window.location.href = 'pages/bikeCreating.html';
+              
             }
         },
         error: function (e) {
@@ -70,7 +74,24 @@ function loginUser(userData) {
             if(result.msg === 'logged'){
                 console.log(result.msg+"login"); 
                 sessionStorage.setItem('username', msg.email);  
-                sessionStorage.setItem('isLogin', 'true');  
+                sessionStorage.setItem('isLogin', 'true');
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://localhost:1080/bymail',
+                    dataType: 'json',
+                    data: {"email":userData.email}, 
+                    accepts: "application/json",
+                    crossDomain: true,
+                    contentType: 'application/json',
+                    success: function (result) {
+                        console.log(result);
+                            sessionStorage.setItem('userId', result.id);  
+                            window.location.href = 'pages/bikeCreating.html';
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+                })
             }
         },
         error: function (e) {
