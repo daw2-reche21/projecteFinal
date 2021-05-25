@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel = "stylesheet" href="../index.css">
+    <link rel = "stylesheet" href="../css/bikecreating.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
@@ -16,8 +18,8 @@
         <nav class="navbar navbar-light">
             <a class="navbar-brand" href="#"><h3>BikeLive</h3></a>
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary">Help</button>
-                <button type="button" class="btn btn-secondary">Notifications <span class="badge badge-light">4</span></button>
+                <button type="button" class="btn btn-secondary" title="go to help page"><i class="fas fa-info"></i></button>
+                <button type="button" title="notifications button" class="btn btn-secondary"><i class="fas fa-bell"></i> <span class="badge badge-light">4</span></button>
               </div>
 
         </nav>
@@ -29,7 +31,7 @@
             <h2>Create your Bike</h2>
             <div class="form-group">
               <label for="bikeName">Name your bike</label>
-              <input type="text" class="form-control" id="nombreBici" placeholder="My awesome bike" required>
+              <input type="text" minlength="1" maxlength="50" class="form-control" id="nombreBici" placeholder="My awesome bike" required>
             </div>
             <div class="form-group">
               <label for="selectType">Choose a bike type</label>
@@ -46,31 +48,20 @@
                 <input  min="0" max="80000" type="number" value=0 
                 class="form-control" id="kmsBike" placeholder="Write 0 if you don't know" required>
               </div>
-            <button type="submit" class="btn btn-primary" id="btnCreateBike">Create Bike</button>
+            <button type="button" class="btn btn-primary" id="btnCreateBike"><i class="fa fa-wrench"></i> Create Bike</button>
           </form>
         </div>
+        <div id="imgMechanic" ><img src="../imgs/jp1.png" alt="Mechanic helper"></div>
     </div>
     <div id="footerNoLogin">
         <hr />
         
-        <div id="menuFooterLogin"><div class="list-group list-group-flush">
-            <button type="button" id="footLogin" class="list-group-item list-group-item-action active">
-              Login
-            </button>
-            <button type="button" class="list-group-item list-group-item-action disabled">My bikes</button>
-            <button type="button" class="list-group-item list-group-item-action disabled">Upload trainning</button>
-            <button type="button" class="list-group-item list-group-item-action disabled">Profile</button>
-            <button type="button" class="list-group-item list-group-item-action disabled">Help/Contact us</button>
-          </div></div>
-          <div class="text-center" id="autor"><h4>BikeLive by Pere Reche</h4>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Maintenance of your bike</li>
-                <li class="list-group-item">Insta notifications to make easier</li>
-                <li class="list-group-item">All kind of bikes</li>
-                <li class="list-group-item">Professionals and experts of bike mechanical behind</li>
-              </ul>
-         </div>
-        
+        <div id="menuFooterLogin">
+          <div class="list-group d-flex flex-lg-row flex-md-column flex-sm-column justify-content-lg-center">
+            <button type="button" class="btn btn-danger btn-lg m-2"><i class="fa fa-bicycle"></i></i> My Bikes</button>
+            <button type="button" class="btn btn-info btn-lg m-2"><i class="fa fa-upload"></i> Upload Trainning</button>
+            <button type="button" class="btn btn-info btn-lg m-2"><i class="fa fa-user-circle"></i> Profile</button>
+          </div>     
     </div>
       
     <!-- Optional JavaScript -->
@@ -78,7 +69,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="../index.js"></script>
     <script src="../js/bikeCreating.js"></script>
   </body>
 </html>

@@ -39,11 +39,12 @@ function registerUser(userData) {
         crossDomain: true,
         contentType: 'application/json',
         success: function (result) {
-            console.log(result.msg);
-            if(result.status == 200){
+            console.log(result);
+            if(result.msg === 'User created'){
                 console.log(result.id);
                 sessionStorage.setItem('userId', result.id);  
                 sessionStorage.setItem('userName', userData.email); 
+                sessionStorage.setItem('islogin', 'logged'); 
                 window.location.href = 'pages/bikeCreating.html';
               
             }
@@ -52,10 +53,7 @@ function registerUser(userData) {
              // log error in browser
             console.log(e);
         }
-    }).done(function(){
-
-        $('#registerForm').html(`<h3>Register Succesfully!</h3>`);
-    });
+    })
 };
 
 
@@ -73,35 +71,52 @@ function loginUser(userData) {
             console.log(result.msg);
             if(result.msg === 'logged'){
                 console.log(result.msg+"login"); 
-                sessionStorage.setItem('username', msg.email);  
-                sessionStorage.setItem('isLogin', 'true');
-                $.ajax({
-                    type: 'GET',
-                    url: 'http://localhost:1080/bymail',
-                    dataType: 'json',
-                    data: {"email":userData.email}, 
-                    accepts: "application/json",
-                    crossDomain: true,
-                    contentType: 'application/json',
-                    success: function (result) {
-                        console.log(result);
-                            sessionStorage.setItem('userId', result.id);  
-                            window.location.href = 'pages/bikeCreating.html';
-                    },
-                    error: function (e) {
-                        console.log(e);
-                    }
-                })
+                sessionStorage.setItem('isLogin', result.msg);
+                sessionStorage.setItem('userName', result.email);
+                getUser(result.email); 
+                
             }
+           
         },
         error: function (e) {
             $('#btnLogin').parent().append(`<p class='msgError'>Incorrect email or password</p>`);
             console.log(e);
         }
+    }).done(function(){
+        if(localStorage.getItem('userName')){
+            getUser(localStorage.getItem('userName'));
+        }
     })
 };
 
+function getUser(email) {
+
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost:1080/email',
+        dataType: 'json',
+        data: JSON.stringify({"email":email}), 
+        accepts: "application/json",
+        crossDomain: true,
+        contentType: 'application/json',
+        success: function (result) {
+            sessionStorage.setItem('userId', result[0]["id"]); 
+            window.location.href = 'pages/bikeCreating.html'; 
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    })
+};
+
+
+
 $(document).ready(function() {
+    
+    if(localStorage.getItem('isLogin') === 'logged'){
+        window.location.href = 'pages/bikeCreating.html'; 
+    }
+    
     console.log($('#emailRegistro').val());
     
         $('#emailRegistro').keyup(function(){

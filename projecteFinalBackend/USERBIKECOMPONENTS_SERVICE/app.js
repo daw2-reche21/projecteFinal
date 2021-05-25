@@ -1,12 +1,13 @@
 const express = require ('express')
 const mysql = require('mysql');
 const { body, validationResult } = require('express-validator');
-
-const PORT = process.env.PORT || 3020;
+var cors = require('cors');
+const PORT = process.env.PORT || 1020;
 
 const app = express();
 
 app.use(express.json());
+app.options('*',cors());
 
 const connection = mysql.createConnection( {
 	connectionLimit: 10,
@@ -18,7 +19,7 @@ const connection = mysql.createConnection( {
 
 //Routes
 
-app.get('/bike/:id',(req,res) =>{
+app.get('/bike/:id', cors(),(req,res) =>{
     const {id } = req.params;
     const sql = 'SELECT * FROM userbikecomponents u, components c where u.idBike = ? AND c.id=u.idComponent';
     connection.query(sql, id,  (error, results) => {
@@ -31,7 +32,7 @@ app.get('/bike/:id',(req,res) =>{
     })
 });
 
-app.get('/:id',(req,res) =>{
+app.get('/:id', cors(),(req,res) =>{
         const {id } = req.params;
         const sql = `SELECT * FROM userbikecomponents u, components c WHERE u.id = ${id} AND c.id=u.idComponent`;
         connection.query(sql, (error, results) => {
@@ -44,7 +45,7 @@ app.get('/:id',(req,res) =>{
         })   
 });
 
-app.post('/', (req,res) =>{
+app.post('/', cors(), (req,res) =>{
     const sql = 'INSERT INTO userbikecomponents SET ?';  
     const userBikeComponentsData = {
         idBike: req.body.idBike,
@@ -56,7 +57,7 @@ app.post('/', (req,res) =>{
     })   
 });
 
-app.put('/:id', (req,res) =>{
+app.put('/:id', cors(), (req,res) =>{
     const id = req.params.id;
     const sql = 'UPDATE userbikecomponents SET ? WHERE id = ?'; 
     connection.query(sql, [req.body, id], (error, result) => {
@@ -69,7 +70,7 @@ app.put('/:id', (req,res) =>{
     });
 });
 
-app.delete('/:id', (req,res) =>{
+app.delete('/:id', cors(), (req,res) =>{
     const id = req.params.id;
     const sql = 'DELETE FROM userbikecomponents WHERE id = ?'; 
     connection.query(sql, id, (error, result) => {

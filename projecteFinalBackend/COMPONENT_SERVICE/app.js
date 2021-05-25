@@ -1,12 +1,14 @@
 const express = require ('express')
 const mysql = require('mysql');
 const { body, validationResult } = require('express-validator');
+var cors = require('cors');
 
-const PORT = process.env.PORT || 3010;
+const PORT = process.env.PORT || 1067;
 
 const app = express();
 
 app.use(express.json());
+app.options('*',cors());
 
 const connection = mysql.createConnection( {
 	connectionLimit: 10,
@@ -18,7 +20,7 @@ const connection = mysql.createConnection( {
 
 //Routes
 
-app.get('/',(req,res) =>{
+app.get('/', cors(),(req,res) =>{
     const sql = 'SELECT * FROM components';
     connection.query(sql, (error, results) => {
         if(error) throw error;
@@ -30,7 +32,7 @@ app.get('/',(req,res) =>{
     })
 });
 
-app.get('/:id',(req,res) =>{
+app.get('/:id', cors(),(req,res) =>{
     
         const {id } = req.params;
         const sql = `SELECT * FROM components WHERE id = ${id}`;
@@ -44,7 +46,22 @@ app.get('/:id',(req,res) =>{
         })   
 });
 
-app.post('/', (req,res) =>{
+app.get('/biketype/:biketype', cors(),(req,res) =>{
+    
+        const bikeType = req.params.bikeType;
+        const sql = `SELECT * FROM components WHERE bikeType = ${bikeType}`;
+        connection.query(sql, (error, results) => {
+            if(error) throw error;
+            if(results.length > 0){
+                res.json(results);
+            }else  {
+                res.send('Not results');      
+            }
+        })   
+});
+
+
+app.post('/', cors(),(req,res) =>{
 
     const sql = 'INSERT INTO components SET ?';  
     const componentData = {
@@ -57,7 +74,7 @@ app.post('/', (req,res) =>{
     })   
 });
 
-app.put('/:id', (req,res) =>{
+app.put('/:id', cors(), (req,res) =>{
     const id = req.params.id;
     const sql = 'UPDATE components SET ? WHERE id = ?'; 
     connection.query(sql, [req.body, id], (error, result) => {
@@ -70,7 +87,7 @@ app.put('/:id', (req,res) =>{
     });
 });
 
-app.delete('/:id', (req,res) =>{
+app.delete('/:id', cors(), (req,res) =>{
     const id = req.params.id;
     const sql = 'DELETE FROM components WHERE id = ?'; 
     

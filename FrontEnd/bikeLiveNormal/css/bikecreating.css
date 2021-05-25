@@ -1,0 +1,44 @@
+#imgMechanic{
+    flex-grow:0;
+
+}
+#imgMechanic img{
+    width: 200px;
+}
+#register{
+ align-items: center;
+}
+#btnCreateBike{
+    background-color: #19d3da !important;
+}
+.imgComponent{
+    width: 100px !important;
+}
+.registerComponentes{
+    flex-flow: column wrap;
+    justify-content: center;
+}
+.mostrarComponentes{
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.cartaComponente{
+    display: flex;
+    flex-direction: column;
+}
+@media(max-width: 600px){
+    #register{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    #mostrarComponentes{
+        flex-direction: column;
+        flex-grow: 0;
+    }
+    .cartaComponente{
+        width: 50%;
+    }
+}
