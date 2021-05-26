@@ -13,9 +13,10 @@
 }
 .imgComponent{
     width: 100px !important;
+    height: 100px !important;
 }
 .registerComponentes{
-    flex-flow: column wrap;
+    flex-flow: column wrap-reverse;
     justify-content: center;
 }
 .mostrarComponentes{
@@ -28,17 +29,28 @@
 .cartaComponente{
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
-@media(max-width: 600px){
-    #register{
-        display: flex;
-        flex-direction: column-reverse;
-    }
+@media(max-width: 700px){
+    
     #mostrarComponentes{
-        flex-direction: column;
         flex-grow: 0;
     }
-    .cartaComponente{
-        width: 50%;
-    }
+}
+.contenedorCarta{
+    width: 80px;
+}
+#carritoComponents{
+    max-height: 200px;
+    overflow: auto;
+}
+.btnAddComponent{
+    align-self: stretch;
+}
+
+#finishBike{
+    align-self: center;
+}
+#btnFinishBike{
+    background-color: #19d3da !important;
 }

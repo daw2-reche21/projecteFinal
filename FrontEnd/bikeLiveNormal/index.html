@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel = "stylesheet" href="index.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel = "stylesheet" href="index.css">
   </head>
   <body>
 
@@ -31,10 +32,12 @@
                           <input type="password" class="form-control" id="passwordLogin" placeholder="Password" required>
                         </div>
                         <button type="button" id="btnLogin" class="btn btn-primary">Sign in</button>
+                        <div class="errorLogin"></div>
                       </form>
                  </div>
               </div>
         </nav>
+        <hr/>
     </div>
     <div><h1 id="titulo">Keep the life of your Bike</h1></div>
     <div id="register"> 
@@ -45,6 +48,7 @@
             <div class="form-group">
               <label for="email">Email address</label>
               <input type="email" class="form-control" id="emailRegistro" placeholder="email@example.com" required>
+              <p class="errorForm"></p>
             </div>
             <div class="form-group">
               <label for="password">Password</label>
@@ -54,25 +58,19 @@
           </form>
         </div>
     </div>
-    <div id="footerNoLogin">
-        <hr />
-        
-        <div id="menuFooterLogin"><div class="list-group list-group-flush">
-            <button type="button" id="footLogin" class="list-group-item list-group-item-action active">
-              Login
-            </button>
-            <button type="button" class="list-group-item list-group-item-action disabled">My bikes</button>
-            <button type="button" class="list-group-item list-group-item-action disabled">Upload trainning</button>
-            <button type="button" class="list-group-item list-group-item-action disabled">Profile</button>
-            <button type="button" class="list-group-item list-group-item-action disabled">Help/Contact us</button>
-          </div></div>
-          <div class="text-center" id="autor"><h4>BikeLive by Pere Reche</h4>
+    <div id="footerNoLogin"> 
+        <div id="menuFooterLogin">
+          <div class="text-center" id="autor">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Maintenance of your bike</li>
-                <li class="list-group-item">Insta notifications to make easier</li>
-                <li class="list-group-item">All kind of bikes</li>
-                <li class="list-group-item">Professionals and experts of bike mechanical behind</li>
+              <button type="button" id="footLogin" class="btn btn-primary btn-lg btn-block">
+                <p class="h5">Login</p>
+              </button>
+                <li class="list-group-item bg-secondary text-light"><p class="h4">Maintenance of your bike <i class="fa fa-wrench"></i></p></li>
+                <li class="list-group-item bg-light"><p class="h4">Insta notifications to make easier <i class="fas fa-bell"></i></i></p></li>
+                <li class="list-group-item bg-secondary text-light"><p class="h4">All kind of bikes <i class="fas fa-bicycle"></i></p></li>
+                <li class="list-group-item bg-light"><p class="h4">Professionals and experts of bike mechanical behind <i class="fas fa-users"></i></p></li>
               </ul>
+              <h4 class="p-4 h5 text-info">BikeLive by Pere Reche</h4>
          </div>
         
     </div>

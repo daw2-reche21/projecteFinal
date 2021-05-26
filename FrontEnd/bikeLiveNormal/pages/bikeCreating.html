@@ -8,9 +8,9 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel = "stylesheet" href="../index.css">
     <link rel = "stylesheet" href="../css/bikecreating.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
 
@@ -23,13 +23,14 @@
               </div>
 
         </nav>
+        <hr/>
     </div>
-    <div><h1 id="titulo">Keep the life of your Bike</h1></div>
+    <div id="tituloBody"><h1 id="titulo">Bike Creating</h1></div>
     <div id="register"> 
         <div id="bikeCreatingForm">
         <form class="menu p-4" id="formularioCreateBike">
-            <h2>Create your Bike</h2>
-            <div class="form-group">
+            <h2>First, tell me about your bike: </h2>
+            <div class="form-group ">
               <label for="bikeName">Name your bike</label>
               <input type="text" minlength="1" maxlength="50" class="form-control" id="nombreBici" placeholder="My awesome bike" required>
             </div>
@@ -44,11 +45,11 @@
               </select>
             </div>
             <div class="form-group">
-                <label for="kmsBike">How many kilómeters has your bike?</label>
+                <label for="kmsBike">How many kilometers has your bike?</label>
                 <input  min="0" max="80000" type="number" value=0 
                 class="form-control" id="kmsBike" placeholder="Write 0 if you don't know" required>
               </div>
-            <button type="button" class="btn btn-primary" id="btnCreateBike"><i class="fa fa-wrench"></i> Create Bike</button>
+            <button type="button" class="btn btn-primary" id="btnCreateBike">Create Bike <i class="fa fa-wrench"></i></button>
           </form>
         </div>
         <div id="imgMechanic" ><img src="../imgs/jp1.png" alt="Mechanic helper"></div>

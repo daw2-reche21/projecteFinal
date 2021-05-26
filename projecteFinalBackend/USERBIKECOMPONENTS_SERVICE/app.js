@@ -53,7 +53,7 @@ app.post('/', cors(), (req,res) =>{
     }
     connection.query(sql, userBikeComponentsData, (error,result) => {
         if (error) throw error;
-        res.status(200).json({msg:'UserBikeComponent created', id:result.insertId});
+        res.status(200).json({msg:'created', id:result.insertId});
     })   
 });
 

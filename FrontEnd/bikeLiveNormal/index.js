@@ -13,12 +13,13 @@ function userExist(mail) {
             console.log(result.msg);
             if(result.msg === 'Exist'){
                 $('#emailRegistro').css({"border-color":"red"});
-                $('#emailRegistro').parent().append(`<p class='msgError'>This email is already in use</p>`);
+                $(".errorForm").text("");
+                $('.errorForm').text(`This email is already in use`);
                 wrongMail = true;
             }else{
                 wrongMail = false;
                 $('#emailRegistro').css({"border-color":"green"}); 
-                $('.msgError').text("");
+                $('.errorForm').text("");
             }
         },
         error: function (e) {
@@ -79,12 +80,12 @@ function loginUser(userData) {
            
         },
         error: function (e) {
-            $('#btnLogin').parent().append(`<p class='msgError'>Incorrect email or password</p>`);
+            $('.errorLogin').html('<p>Incorrect email or password<p>');
             console.log(e);
         }
     }).done(function(){
-        if(localStorage.getItem('userName')){
-            getUser(localStorage.getItem('userName'));
+        if(sessionStorage.getItem('userName')){
+            getUser(sessionStorage.getItem('userName'));
         }
     })
 };
@@ -113,7 +114,7 @@ function getUser(email) {
 
 $(document).ready(function() {
     
-    if(localStorage.getItem('isLogin') === 'logged'){
+    if(sessionStorage.getItem('isLogin') === 'logged'){
         window.location.href = 'pages/bikeCreating.html'; 
     }
     

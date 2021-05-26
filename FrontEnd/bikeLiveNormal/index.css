@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,500;1,100;1,400&display=swap');
+body{
+    font-family: 'Roboto', sans-serif !important;
+}
+
 #headerNologin, #titulo, #register{
     padding: 1em;
 }
@@ -35,6 +40,9 @@
 #titulo{
     text-align: center;
 }
+.tituloPalabra{
+    color: #19d3da !important ;
+}
 #loginForm{
     display: flex;
     justify-content: flex-end;
@@ -44,16 +52,14 @@
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
-    border-top: 1px solid rgb(163, 163, 163);
 }
 #autor{
     flex-grow: 9;
 }
 #menuFooterLogin{
-   flex-grow: 2;
+   flex-grow: 0;
+   flex: 1;
 }
-
-
 
 
 
