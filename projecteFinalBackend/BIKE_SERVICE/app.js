@@ -32,21 +32,8 @@ app.get('/', cors(),(req,res) =>{
     })
 });
 
-app.get('/:id', cors(),(req,res) =>{
-    
-        const {id } = req.params;
-        const sql = `SELECT * FROM bikes WHERE id = ${id}`;
-        connection.query(sql, (error, results) => {
-            if(error) throw error;
-            if(results.length > 0){
-                res.json(results);
-            }else  {
-                res.status(400).json({msg:'Not results'});      
-            }
-        })   
-});
 
-app.get('/userbikes/:idUser',cors(),(req,res) =>{
+app.get('/:idUser',cors(),(req,res) =>{
     
     const id  = req.params.idUser;
     const sql = `SELECT * FROM bikes WHERE idUser = ${id}`;

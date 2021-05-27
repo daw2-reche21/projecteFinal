@@ -15,24 +15,24 @@
   <body>
 
     <div id="headerLogin">
-        <nav class="navbar navbar-light">
-            <a class="navbar-brand" href="#"><h3>BikeLive</h3></a>
+        <nav class="navbar navbar-light border-bottom-1 fixed-top" id="navArriba">
+            <a class="navbar-brand" title="go to your bikes and components" href="mybikes.html"><h3>BikeLive</h3></a>
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-secondary" title="go to help page"><i class="fas fa-info"></i></button>
                 <button type="button" title="notifications button" class="btn btn-secondary"><i class="fas fa-bell"></i> <span class="badge badge-light">4</span></button>
               </div>
 
         </nav>
-        <hr/>
     </div>
-    <div id="tituloBody"><h1 id="titulo">Bike Creating</h1></div>
-    <div id="register"> 
+    <div id="tituloBody" class=' m-0'><h1 id="titulo" class="m-0">Bike Creating</h1>
+      <hr class="m-0"/></div>
+    <div id="register" class='fondoColor'> 
         <div id="bikeCreatingForm">
         <form class="menu p-4" id="formularioCreateBike">
             <h2>First, tell me about your bike: </h2>
             <div class="form-group ">
               <label for="bikeName">Name your bike</label>
-              <input type="text" minlength="1" maxlength="50" class="form-control" id="nombreBici" placeholder="My awesome bike" required>
+              <input type="text" minlength="4" maxlength="50" class="form-control" id="nombreBici" placeholder="My awesome bike" required>
             </div>
             <div class="form-group">
               <label for="selectType">Choose a bike type</label>
@@ -59,10 +59,10 @@
         
         <div id="menuFooterLogin">
           <div class="list-group d-flex flex-lg-row flex-md-column flex-sm-column justify-content-lg-center">
-            <button type="button" class="btn btn-danger btn-lg m-2"><i class="fa fa-bicycle"></i></i> My Bikes</button>
-            <button type="button" class="btn btn-info btn-lg m-2"><i class="fa fa-upload"></i> Upload Trainning</button>
-            <button type="button" class="btn btn-info btn-lg m-2"><i class="fa fa-user-circle"></i> Profile</button>
-          </div>     
+            <a type="button" href="mybikes.html" title="go to your bikes and components" class="btn btn-danger btn-lg m-2"><i class="fa fa-bicycle"></i></i> My Bikes</a>
+            <a type="button" href="uploadtrainning.html" title="Upload your trainnings" class="btn btn-info btn-lg m-2"><i class="fa fa-upload"></i> Upload Trainning</a>
+            <a type="button" href="profile.html"  title="View your profile" class="btn btn-info btn-lg m-2"><i class="fa fa-user-circle"></i> Profile</a>
+          </div>      
     </div>
       
     <!-- Optional JavaScript -->

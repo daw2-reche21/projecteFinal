@@ -1,0 +1,21 @@
+#register{
+    flex-direction: column;
+}
+#imgMechanic img{
+    float:center;
+    margin: auto;
+}
+#myBikesMain{
+    align-self: stretch;
+    display: flex;
+    align-content: center;
+    flex-flow: row wrap;
+    
+}
+.btnBike{
+    flex: auto;
+    border:1px solid black
+}
+#catalogoComponentes{
+    align-content: space-between;
+}

@@ -8,9 +8,6 @@
 #register{
  align-items: center;
 }
-#btnCreateBike{
-    background-color: #19d3da !important;
-}
 .imgComponent{
     width: 100px !important;
     height: 100px !important;
@@ -31,10 +28,13 @@
     flex-direction: column;
     align-items: center;
 }
-@media(max-width: 700px){
+@media(max-width: 600px){
     
     #mostrarComponentes{
         flex-grow: 0;
+        overflow-y: scroll;
+        max-height: 100px;
+        border: 8px solid black;
     }
 }
 .contenedorCarta{
@@ -47,10 +47,12 @@
 .btnAddComponent{
     align-self: stretch;
 }
-
 #finishBike{
     align-self: center;
 }
-#btnFinishBike{
+.fondoColor{
     background-color: #19d3da !important;
+}
+#navArriba{
+    background-color: rgba(100, 148, 237, 0.363) !important;
 }
