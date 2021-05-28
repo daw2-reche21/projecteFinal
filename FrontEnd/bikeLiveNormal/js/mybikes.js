@@ -1,4 +1,4 @@
-function getComponents(idBike){
+function getComponentsBike(idBike){
     $.ajax({
         type: 'GET',
         url: 'http://localhost:1020/bike/'+idBike,
@@ -14,20 +14,65 @@ function getComponents(idBike){
              <div class="card-body">
                <h5 class="card-title" >Name: ${component.name}</h5>
                <p class="card-text" >Model: ${component.brand}  ${component.model} </p>
-               <p class="card-text"  >Bike live:</p><div class="progress">
-               <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="${porcentageKms}" aria-valuemin="0" aria-valuemax="100" style="width:${porcentageKms}%">${component.currentKms} kms / ${component.liveKms} kms</div>
-             </div>
-               <div class="divbtnComponent">
-               <button type="button" title="update component"  class="btn btn-primary btn-sm btnUpdateComponent"><i class="fas fa-plus-home"></i></button>
-               </div> 
-             </div>
-        </div>`; 
+               <p class="card-text"  >Bike live:</p><div class="progress">`;
+               
+               if(porcentageKms>=80 && porcentageKms<=99){
+                var bar = `<div class="progress-bar progress-bar-striped progress-bar-animated text-white bg-warning" role="progressbar" aria-valuenow="${porcentageKms}" aria-valuemin="0" aria-valuemax="100" style="width:${porcentageKms}%">${component.currentKms} kms / ${component.liveKms} kms</div>
+                </div>`;
+                }else if(porcentageKms>=100){
+                    var bar = `<div class="progress-bar progress-bar-striped progress-bar-animated text-white bg-danger" role="progressbar" aria-valuenow="${porcentageKms}" aria-valuemin="0" aria-valuemax="100" style="width:${porcentageKms}%">${component.currentKms} kms / ${component.liveKms} kms</div>
+                    </div>`;  
+                }else if(porcentageKms<80){
+                    var bar = `<div class="progress-bar progress-bar-striped progress-bar-animated text-white bg-success" role="progressbar" aria-valuenow="${porcentageKms}" aria-valuemin="0" aria-valuemax="100" style="width:${porcentageKms}%">${component.currentKms} kms / ${component.liveKms} kms</div>
+                    </div>`; 
+                } 
+               
+                divComponents+=bar;
+                divComponents+=`
+                        <div class="divbtnComponent mt-2 float-right">
+                    <button type="button" title="remove component"  class="btn btn-danger btn-sm btnDeleteC"> <i class="fas fa-trash"></i></button>
+                    <button type="button" title="Set to 0 kms"   class="btn btn-primary btn-sm btnSetNew"><i class="fas fa-recycle"></i></button>
+                    </div> 
+                    </div>
+                    </div>`;
+            
         }
+        
         divComponents+=`</div>`;
-        $('#myBikesMain').append(divComponents);
+        $('#myBikesMain').html(divComponents);
+        // $(document).ready(function(){
+        //     $("#register").on('click', '.btnDeleteC', modifyComponent({"isSet":0}));
+        //     $("#register").on('click', '.btnSetNew', modifyComponent({"currentKms":0}));
+        // })
+
     }).fail(function(err){
         console.log(err);
     })
+}
+
+function modifyComponent(param){
+    alert("holaa");
+    const idComponent = $(this).parents().find('.cartaComponente').attr('data-id');
+    const params = param;
+    $.ajax({
+     type: 'PUT',
+     url: 'http://localhost:1020/'+idComponent,
+     dataType: 'json',
+     data: JSON.stringify(params), 
+     accepts: "application/json",
+     crossDomain: true,
+     contentType: 'application/json'
+     }).done(function(result){   
+         console.log(result.msg);
+         setTimeout(function(){
+             getComponentsBike(sessionStorage.getItem('idBike'));    
+         },2000)
+ 
+     }).fail(function(err){
+         console.log(err);
+     })
+ 
+
 }
 
 function getBikes(){
@@ -46,15 +91,15 @@ function getBikes(){
                var divBike = ``;
                for(var bikes of result){
                 
-                divBike += `<button class="btn btn-light btnBike" data-id="${bikes.id}"><h3>${bikes.name}</h3><h3>LiveKms: ${bikes.totalKms}</h3><button class="btn btn-sm btndeleteBike" data-id=""${bikes.id}"><i class="fas fa-trash-alt"></i></button></button>`;
+                divBike += `<button class="btn btn-light btnBike" data-id="${bikes.id}"><h3>${bikes.name}</h3><h3>LiveKms: ${bikes.totalKms}</h3></button>`;
                }
-               $("#myBikesMain").html(divBike);
+               $("#selectBikes").html(divBike);
                $('.btnBike').click(function(){
                    var idBike=$(this).attr('data-id');
-                   getComponents(idBike);
+                   sessionStorage.setItem('idBikeSelected',idBike);
+                   getComponentsBike(idBike);
                })
-                  
-
+                
             },
             error: function (e) {
                 console.log(e);

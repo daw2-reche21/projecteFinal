@@ -1,12 +1,13 @@
 const express = require ('express');
 const mysql = require('mysql');
-
+var cors = require('cors');
 
 const PORT = process.env.PORT || 1015;
 
 const app = express();
 
 app.use(express.json());
+app.options('*',cors());
 
 const connection = mysql.createConnection( {
 	connectionLimit: 10,
@@ -18,7 +19,7 @@ const connection = mysql.createConnection( {
 
 //Routes
 
-app.get('/:idUser',(req,res) =>{
+app.get('/:idUser',cors(),(req,res) =>{
     const id = req.params.idUser;
     const sql = 'SELECT * FROM notifications WHERE idUser = ?  ';
     connection.query(sql, id, (error, results) => {
@@ -31,7 +32,7 @@ app.get('/:idUser',(req,res) =>{
     })
 });
 
-app.get('/unseen/:idUser',(req,res) =>{
+app.get('/unseen/:idUser',cors(),(req,res) =>{
     
     const idUser = req.params.idUser;
     const sql = `SELECT * FROM notifications WHERE idUser = ? AND seen=0 ORDER by createdDate DESC `;
@@ -45,7 +46,7 @@ app.get('/unseen/:idUser',(req,res) =>{
     })   
 });
 
-app.post('/', (req,res) =>{
+app.post('/', cors(),(req,res) =>{
 
     const sql = 'INSERT INTO notifications SET ?';  
     const notificationData = {
@@ -58,7 +59,7 @@ app.post('/', (req,res) =>{
     })   
 });
 
-app.put('/:id', (req,res) =>{
+app.put('/:id', cors(), (req,res) =>{
     const id = req.params.id;
     const sql = 'UPDATE notifications SET ? WHERE id = ?'; 
     connection.query(sql, [req.body, id], (error, result) => {
@@ -120,7 +121,7 @@ const createNotificationComponent = async function(result,idUser){
     return Promise.all(promises);
 }
 
-app.post('/livenotifications',(req,res) => {
+app.post('/livenotifications', cors(),(req,res) => {
     const idBike = req.body.idBike;
     const idUser = req.body.idUser;
     try{

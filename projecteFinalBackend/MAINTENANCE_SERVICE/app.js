@@ -1,12 +1,14 @@
 const express = require ('express')
 const mysql = require('mysql');
 const { body, validationResult } = require('express-validator');
+var cors = require('cors');
 
 const PORT = process.env.PORT || 1037;
 
 const app = express();
 
 app.use(express.json());
+app.options('*',cors());
 
 const connection = mysql.createConnection( {
     connectionLimit: 10,
@@ -32,7 +34,7 @@ const getKmsBike = async function(id){
 }
 
 const updateKmsBike = async function(kms, kmsUpdate, id){  
-    var kmsTotales = kms + kmsUpdate;  
+    var kmsTotales = parseInt(kms + kmsUpdate);  
     mensaje = "";
     const sql = `UPDATE bikes set totalKms = ? where id = ?`;
     return new Promise( (resolve) => {
@@ -71,16 +73,17 @@ const updateKmsComponents = async function(result, kms){
 }
 
 //Routes
-app.post('/', body('kms').isFloat({min : 0}), async(req, res, next) =>{
+app.post('/', body('kms').isFloat({min : 0}), cors(), async(req, res, next) =>{
    const idBike = req.body.idBike;
-   const kms = req.body.kms;
+   const kms = parseInt(req.body.kms);
    const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
     try{
         getKmsBike(idBike).then(result => {
-           updateKmsBike(result,kms, idBike);   
+			var resultInt = parseInt(result);
+           updateKmsBike(resultInt,kms, idBike);   
         }).then(result =>{
             return getKmsComponents(idBike);
         }).then(result =>{
@@ -93,7 +96,7 @@ app.post('/', body('kms').isFloat({min : 0}), async(req, res, next) =>{
     }
 })
 
-app.post('/forwardKms', async(req, res, next) =>{
+app.post('/forwardKms', cors(), async(req, res, next) =>{
     const idBike = req.body.idBike;
     const kms = req.body.kms;
     const errors = validationResult(req);

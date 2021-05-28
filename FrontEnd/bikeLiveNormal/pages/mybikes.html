@@ -16,9 +16,10 @@
   <body>
 
     <div id="headerLogin">
-        <nav class="navbar navbar-light border-bottom-1 fixed-top" id="#navArriba">
+        <nav class="navbar navbar-light border-bottom-1 fixed-top" id="navArriba">
             <a class="navbar-brand" title="go to your bikes and components" href="mybikes.html"><h3>BikeLive</h3></a>
             <div class="btn-group" role="group" aria-label="Basic example">
+              <a type="button" href="bikeCreating.html" title="go to create a bike" class="btn btn-secondary bg-danger text-white">NEW BIKE</a>
                 <button type="button" class="btn btn-secondary" title="go to help page"><i class="fas fa-info"></i></button>
                 <button type="button" title="notifications button" class="btn btn-secondary"><i class="fas fa-bell"></i> <span class="badge badge-light">4</span></button>
               </div>
@@ -26,14 +27,48 @@
         </nav>
     </div>
     
-    <div id="tituloBody" class=' m-0'><h1 id="titulo" class="m-0">My bikes</h1>
+    <div id="tituloBody" class='pt-5 m-0'><h1 id="titulo" class="m-0">My bikes</h1>
       <hr class="m-0"/></div>
-    <div id="register" class='fondoColor'>
-        <div id="imgMechanic" ><img src="../imgs/jp1.png" alt="Mechanic helper"><p class="lead">Select a bike to see the life of his components <i class="fas fa-arrow-circle-down"></i></p></div>
-        <div id="selectBikes"></div> 
-        <div id="myBikesMain mt-5">
+    <div id="register" class='fondoColor pb-5'>
+        <div id="imgMechanic" class="text-center" ><img src="../imgs/jp1.png" alt="Mechanic helper"><p class="lead">Select a bike to see the life of his components <i class="fas fa-arrow-circle-down"></i></p></div>
+        <div id="selectBikes" class="mb-4"></div> 
+        <div id="myBikesMain" class="mt-2">
         </div>
         
+    </div>
+    <!-- Button trigger modal -->
+   
+
+    <!-- Modal -->
+    <div class="modal fade" id="updateTrainningModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">How many kilometers have you ride today?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="bikesUpdate">
+              <div class="form-group col-md-4">
+                <label for="selectBikeUpdate">Select your bike</label>
+                <select id="selectBikeUpdate" class="form-control">
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="kmsBike">Put the kilometers:</label>
+                <input  min="1" max="500" type="number" value=1 
+                class="form-control" id="kmsUpdate" placeholder="Write the kilometers of your trainning" required>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="saveUpdate">Upload trainning</button>
+          </div>
+        </div>
+      </div>
     </div>
     <div id="footerNoLogin">
         <hr />
@@ -41,9 +76,11 @@
         <div id="menuFooterLogin">
             <div class="list-group d-flex flex-lg-row flex-md-column flex-sm-column justify-content-lg-center">
               <a type="button" href="#" title="go to your bikes and components" class="btn btn-danger btn-lg m-2"><i class="fa fa-bicycle"></i></i> My Bikes</a>
-              <a type="button" href="uploadtrainning.html" title="Upload your trainnings" class="btn btn-info btn-lg m-2"><i class="fa fa-upload"></i> Upload Trainning</a>
+              <a type="button" href="#" id="btnUploadTrainning" title="Upload your trainings" class="btn btn-info btn-lg m-2" data-toggle="modal" data-target="#updateTrainningModal"><i class="fa fa-upload"></i> Upload Training</a>
               <a type="button" href="profile.html"  title="View your profile" class="btn btn-info btn-lg m-2"><i class="fa fa-user-circle"></i> Profile</a>
-            </div>    
+            </div>  
+            <hr/>
+            <h4 class="p-4 h5 text-info text-center">BikeLive by Pere Reche</h4>    
     </div>
       
     <!-- Optional JavaScript -->
@@ -52,5 +89,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="../js/myBikes.js"></script>
+    <script src="../js/uploadtrainning.js"></script>
   </body>
 </html>

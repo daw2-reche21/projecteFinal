@@ -102,6 +102,8 @@ function getUser(email) {
         contentType: 'application/json',
         success: function (result) {
             sessionStorage.setItem('userId', result[0]["id"]); 
+            sessionStorage.setItem('numBikes', result.numberOfBikes);
+
             window.location.href = 'pages/bikeCreating.html'; 
         },
         error: function (e) {

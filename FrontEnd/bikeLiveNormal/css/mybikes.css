@@ -5,17 +5,37 @@
     float:center;
     margin: auto;
 }
-#myBikesMain{
+#selectBikes{
     align-self: stretch;
     display: flex;
     align-content: center;
     flex-flow: row wrap;
-    
+}
+#myBikesMain{
+    align-content: center;
+    margin-left: 1em;
+    margin-right: 1em;
+     
 }
 .btnBike{
     flex: auto;
     border:1px solid black
+} 
+.cartaComponente{
+    min-width: 200px;
+    margin: 1em;
 }
-#catalogoComponentes{
-    align-content: space-between;
+@media(max-width: 600px){
+    
+    #cartaComponente{
+        margin:0;
+        min-width: auto;
+    }
+    #myBikesMain{
+        margin: 0;
+         
+    }
+}
+#navArriba{
+    background-color: rgba(100, 148, 237, 0.363) !important;
 }

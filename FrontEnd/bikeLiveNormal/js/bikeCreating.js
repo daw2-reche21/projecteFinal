@@ -117,9 +117,11 @@ $(document).ready(function() {
             bikeData.name = $('#nombreBici').val();
             bikeData.type = $('#selectType').val();
             bikeData.bikeKms = $('#kmsBike').val();
-            createBike(bikeData);
-            
+            createBike(bikeData);     
         }); 
+        if(sessionStorage.get('numBikes')>0){
+            $('#btnMyBikeFromCreate').attr('href','mybikes.html');
+        }
 });
 
 num = 0;
@@ -170,8 +172,8 @@ function deleteComponent(){
      })
     
     $('.textInfo').html("");
-    $('#bikeCreatingForm').html(`<h4>Bike and components created succesfuly. </h4> 
-     <h4>Redirecting to your bike... </h4><div class="spinner-border text-dark ml-1" role="status">
+    $('#bikeCreatingForm').html(`<div><h4>Bike and components created succesfully. </h4> 
+     <h4> Redirecting to your bike... </h4></div><div class="spinner-border text-dark ml-1" role="status">
      <span class="sr-only"> Loading...</span>
    </div>`);
 

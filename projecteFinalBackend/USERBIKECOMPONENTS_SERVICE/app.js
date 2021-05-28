@@ -32,18 +32,6 @@ app.get('/bike/:id', cors(),(req,res) =>{
     })
 });
 
-app.get('/:id', cors(),(req,res) =>{
-        const {id } = req.params;
-        const sql = `SELECT * FROM userbikecomponents u, components c WHERE u.id = ${id} AND c.id=u.idComponent`;
-        connection.query(sql, (error, results) => {
-            if(error) throw error;
-            if(results.length > 0){
-                res.status(200).json(results);
-            }else  {
-                res.status(400).json({msg:'ID not found'});     
-            }
-        })   
-});
 
 app.post('/', cors(), (req,res) =>{
     const sql = 'INSERT INTO userbikecomponents SET ?';  
