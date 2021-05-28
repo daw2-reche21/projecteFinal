@@ -14,6 +14,7 @@ function updateMantenance(){
         $("#bikesUpdate").html(`<h3>Training uploaded</h3>`);
         $('#saveUpdate').hide();
         getComponentsBike(sessionStorage.getItem('idBikeSelected'));
+        showUnseenNotifications();
         setTimeout(function(){
             $("#updateTrainningModal").modal('hide')     
         },2000)
