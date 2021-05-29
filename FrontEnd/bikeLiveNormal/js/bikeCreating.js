@@ -119,7 +119,7 @@ $(document).ready(function() {
             bikeData.bikeKms = $('#kmsBike').val();
             createBike(bikeData);     
         }); 
-        if(sessionStorage.get('numBikes')>0){
+        if(sessionStorage.getItem('numBikes')>0){
             $('#btnMyBikeFromCreate').attr('href','mybikes.html');
         }
 });

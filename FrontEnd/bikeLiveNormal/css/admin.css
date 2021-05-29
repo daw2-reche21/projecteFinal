@@ -1,0 +1,5 @@
+#mainAdmin{
+    max-height: 800px;
+    overflow: scroll;
+    overflow-x: hidden;
+}

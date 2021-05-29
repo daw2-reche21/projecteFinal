@@ -42,10 +42,6 @@ function showUnseenNotifications(){
     })
 }
 
-
-
-
-
 function setSeenNotifications(idNotification){
     $.ajax({
         type: 'PUT',
@@ -67,11 +63,14 @@ function setSeenNotifications(idNotification){
 }
 $(document).ready(function(){
     showUnseenNotifications();
+    console.log($('#notificationsLista a').length);
+   
      $('#notificationsMenu').click(function(){
         $('#notificationsLista a').each(function(i){
                 var idNotification = $(this).attr('data-id');
                 setSeenNotifications(idNotification);
         })
      })
+    
 })
 

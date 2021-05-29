@@ -66,7 +66,10 @@ app.post('/', cors(),(req,res) =>{
     const sql = 'INSERT INTO components SET ?';  
     const componentData = {
         name: req.body.name,
-        liveKms: req.body.liveKms
+        liveKms: req.body.liveKms,
+		bikeType: req.body.bikeType,
+		brand: req.body.brand,
+		model: req.body.model
     }
     connection.query(sql, componentData, (error,result) => {
         if (error) throw error;

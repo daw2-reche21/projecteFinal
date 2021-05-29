@@ -69,9 +69,7 @@ function loginUser(userData) {
         crossDomain: true,
         contentType: 'application/json',
         success: function (result) {
-            console.log(result.msg);
             if(result.msg === 'logged'){
-                console.log(result.msg+"login"); 
                 sessionStorage.setItem('isLogin', result.msg);
                 sessionStorage.setItem('userName', result.email);
                 getUser(result.email); 
@@ -103,8 +101,15 @@ function getUser(email) {
         success: function (result) {
             sessionStorage.setItem('userId', result[0]["id"]); 
             sessionStorage.setItem('numBikes', result.numberOfBikes);
-
-            window.location.href = 'pages/bikeCreating.html'; 
+            if(email === 'admin@admin.com'){
+                sessionStorage.setItem('isadmin','admin');
+                window.location.href = 'pages/adminpage.html';
+            }else if(result.numberOfBikes == 0){
+                window.location.href = 'pages/bikeCreating.html'; 
+            }else if(result.numberOfBikes !=0) {
+                window.location.href = 'pages/mybikes.html';
+            }
+            
         },
         error: function (e) {
             console.log(e);
@@ -116,6 +121,9 @@ function getUser(email) {
 
 $(document).ready(function() {
     
+    if(sessionStorage.getItem('isadmin') === 'admin'){
+        window.location.href = 'pages/adminpage.html';  
+    }
     if(sessionStorage.getItem('isLogin') === 'logged'){
         window.location.href = 'pages/bikeCreating.html'; 
     }

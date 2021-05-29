@@ -52,7 +52,7 @@
             </div>
             <div class="form-group">
               <label for="password">Password</label>
-              <input type="password" class="form-control" id="passwordRegistro" placeholder="Password" required>
+              <input type="text" pattern="(?=.*\d)(?=.*[a-záéíóúüñ]).*[A-ZÁÉÍÓÚÜÑ].*" class="form-control" id="passwordRegistro" placeholder="Must have at least 1 uppercase, 1 lowercase, and 1 digit " required>
             </div>
             <button type="submit" class="btn btn-primary btn-lg btn-block" id="btnRegistro">Sign up</button>
           </form>

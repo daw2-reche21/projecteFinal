@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Bike Live</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel = "stylesheet" href="../index.css">
+    <link rel = "stylesheet" href="../css/admin.css">
+  </head>
+  <body>
+
+    <div id="headerLogin">
+        <nav class="navbar navbar-light border-bottom-1 fixed-top" id="navArriba">
+            <a class="navbar-brand" title="go to your bikes and components" href="#"><h3>BikeLive</h3></a>
+            <div class="list-group flex-row">
+                <button type="button" id="btnShowUsers" title="go to your bikes and components" class="btn btn-light btn-lg m-2 text-black">Users</button>
+              <button type="button" id="btnShowBikes"  title="Show components" class="btn btn-light btn-lg m-2 text-black">Bikes</button>
+              <button type="button" id="btnShowComponents" title="Show components" class="btn btn-light btn-lg m-2 text-black">Components</button>
+            </div>  
+        </nav>
+    </div>
+    <div id="tituloBody" class='pt-5 m-0'><h1 id="titulo" class="m-0 bg-dark text-white">ADMIN PAGE</h1>
+      <hr class="m-0"/></div>
+    <div id="mainAdmin" class='bg-dark text-white table-responsive-md table-responsive-sm pl-2 pr-2'> 
+       
+    </div>
+
+    <div class="modal fade" id="updateItemsBD" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="tituloModal">UPDATE ON DATABASE</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div id="divFormUpdate">
+                <div class="form-group">
+                  <label for="kmsBike">Put the kilometers:</label>
+                  <input  min="1" max="500" type="number" value=1 
+                  class="form-control" id="kmsUpdate" placeholder="Write the kilometers of your trainning">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="saveUpdate">Finish</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    <div id="footerNoLogin">
+        <hr />
+        
+        <div id="menuFooterLogin" class="bg-dark">
+        
+            <hr/>
+            <h4 class="p-4 h5 text-info text-center">BikeLive by Pere Reche</h4>    
+        </div>
+    </div>
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="../js/admin.js"></script>
+  </body>
+</html>
