@@ -449,8 +449,6 @@ function generateUpdateFormComponentInsert(){
 
 }
 
-
-
 function deleteSelection(port, registro, tipo){
     console.log(registro.parent().attr('data-id'));
     const idSelected = registro.parent().attr('data-id');
@@ -473,7 +471,6 @@ function deleteSelection(port, registro, tipo){
         console.log(err);
     })
 }
-
 
 $(document).ready(function(){
     getAllUsers();

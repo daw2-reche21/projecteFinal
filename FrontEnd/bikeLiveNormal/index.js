@@ -46,6 +46,7 @@ function registerUser(userData) {
                 sessionStorage.setItem('userId', result.id);  
                 sessionStorage.setItem('userName', userData.email); 
                 sessionStorage.setItem('islogin', 'logged'); 
+                sessionStorage.setItem('numBikes', 0); 
                 window.location.href = 'pages/bikeCreating.html';
               
             }
@@ -72,6 +73,7 @@ function loginUser(userData) {
             if(result.msg === 'logged'){
                 sessionStorage.setItem('isLogin', result.msg);
                 sessionStorage.setItem('userName', result.email);
+                sessionStorage.setItem('numBikes', result.numberOfBikes); 
                 getUser(result.email); 
                 
             }
@@ -139,11 +141,16 @@ $(document).ready(function() {
             var userData = {};
             userData.email = $('#emailRegistro').val();
             userData.password = $('#passwordRegistro').val();
-            if(wrongMail === false){
-                registerUser(userData);
+            if(userData.password === ""){
+                $('.msgError').text("Write a valid password");
             }else{
-                $('.msgError').text("Cannot register, email already exist");
+                if(wrongMail === false){
+                    registerUser(userData);
+                }else{
+                    $('.msgError').text("Cannot register, email already exist");
+                }
             }
+            
         });
     $('#btnLogin').click(function(){
         var userData = {};

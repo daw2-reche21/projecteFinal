@@ -32,6 +32,7 @@ function getComponentsBike(idBike){
                         <div class="divbtnComponent mt-2 float-right">
                     <button type="button" title="remove component"  class="btn btn-danger btn-sm btnDeleteC"> <i class="fas fa-trash"></i></button>
                     <button type="button" title="Set to 0 kms"   class="btn btn-primary btn-sm btnSetNew"><i class="fas fa-recycle"></i></button>
+                    <div class="msgUpdate"></div>
                     </div> 
                     </div>
                     </div>`;
@@ -40,32 +41,37 @@ function getComponentsBike(idBike){
         
         divComponents+=`</div>`;
         $('#myBikesMain').html(divComponents);
-        // $(document).ready(function(){
-        //     $("#register").on('click', '.btnDeleteC', modifyComponent({"isSet":0}));
-        //     $("#register").on('click', '.btnSetNew', modifyComponent({"currentKms":0}));
-        // })
+        $(document).ready(function(){
+            $("#register").on('click', '.btnDeleteC', function(event){
+                event.preventDefault();
+                var idComponent = $(this).parents().find('.cartaComponente').attr('data-id');
+                modifyComponent({"isSet":0}, idComponent);
+            })
+            $("#register").on('click', '.btnSetNew', function(event){
+                event.preventDefault();
+                var idComponent = $(this).parents().find('.cartaComponente').attr('data-id');
+                modifyComponent({"currentKms":0}, idComponent);
+            })
+        })
 
     }).fail(function(err){
         console.log(err);
     })
 }
 
-function modifyComponent(param){
-    alert("holaa");
-    const idComponent = $(this).parents().find('.cartaComponente').attr('data-id');
-    const params = param;
+function modifyComponent(param, id){
     $.ajax({
      type: 'PUT',
-     url: 'http://localhost:1020/'+idComponent,
+     url: 'http://localhost:1020/'+id,
      dataType: 'json',
-     data: JSON.stringify(params), 
+     data: JSON.stringify(param), 
      accepts: "application/json",
      crossDomain: true,
      contentType: 'application/json'
      }).done(function(result){   
-         console.log(result.msg);
+        $('.msgUpdate').html('<p>Component updated!</p>');
          setTimeout(function(){
-             getComponentsBike(sessionStorage.getItem('idBike'));    
+             getComponentsBike(sessionStorage.getItem('idBikeSelected'));    
          },2000)
  
      }).fail(function(err){
@@ -110,4 +116,8 @@ function getBikes(){
 
 $(document).ready(function() {
      getBikes();
+     if(sessionStorage.getItem('idBikeSelected')){
+        getComponentsBike(sessionStorage.getItem('idBikeSelected'));
+     }
+     
 });
